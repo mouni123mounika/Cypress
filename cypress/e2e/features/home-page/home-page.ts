@@ -13,3 +13,22 @@ Then("I should see Navigation Bar and links associated with it", () => {
 And("I should see Home link should be active", () => {
   cy.get("#Navbar ul li").eq(0).should("have.class", "active");
 });
+
+Then("I should see the moving Carousel Items", () => {
+  cy.get("#mycarousel").should("be.visible");
+});
+
+And("There should be {string} Carousel Items", (length, val: string) => {
+  cy.get(".carousel-item").should("have.length", length);
+});
+
+Then("I should see the Executive Chef Row on Home Page", () => {
+  cy.get(".row").eq(8).should("be.visible").should("contain", "Executive Chef");
+});
+And("Executive Chef name should be {string}", (name, val: string) => {
+  cy.get(".row")
+    .eq(8)
+    .within(() => {
+      cy.get(".media-body h2").should("be.visible").should("have.text", name);
+    });
+});
